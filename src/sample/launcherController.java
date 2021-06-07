@@ -73,7 +73,10 @@ public class launcherController {
 
                 PathToTheFile.setText(filePath);
             }
-        });
+        }
+        );
+
+
 
 
 
@@ -121,6 +124,7 @@ public class launcherController {
 
 
 
+
 //                Parent root = null;
 //                try {
 ////                    root = FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -132,6 +136,9 @@ public class launcherController {
 
             }
         });
+
+
+        PathToTheFile.textProperty().addListener((observable, oldValue, newValue) -> filePath = newValue);
 
     }
 }

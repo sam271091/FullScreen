@@ -2,14 +2,29 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.media.*?>
 <?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000305;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-   <center>
-          <Label fx:id="LabelInfo" alignment="CENTER" contentDisplay="CENTER" text="Info " textAlignment="CENTER" textFill="#0be038" wrapText="true" BorderPane.alignment="CENTER">
-              <font>
-                  <Font name="System Bold" size="93.0" />
-              </font>
-          </Label>
-   </center>
+    <center>
+        <StackPane BorderPane.alignment="CENTER">
+            <children>
+                <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" />
+                <VBox alignment="CENTER">
+                    <children>
+                        <Label fx:id="LabelInfo" alignment="TOP_LEFT" text="Info " textFill="#0be038" wrapText="true">
+                            <font>
+                                <Font name="System Bold" size="64.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="labelTotal" text="Total" textFill="#de0b0b">
+                            <font>
+                                <Font name="System Bold" size="72.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
+    </center>
 </BorderPane>
