@@ -10,15 +10,19 @@
         <StackPane BorderPane.alignment="CENTER">
             <children>
                 <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" />
-                <VBox>
-                    <children>
-                        <Label fx:id="LabelInfo" alignment="TOP_LEFT" text="Info " textFill="#0be038" wrapText="true">
-                            <font>
-                                <Font name="System Bold" size="64.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </VBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                      <VBox>
+                          <children>
+                              <Label fx:id="LabelInfo" alignment="TOP_LEFT" text="Info " textFill="#0be038" wrapText="true">
+                                  <font>
+                                      <Font name="System Bold" size="64.0" />
+                                  </font>
+                              </Label>
+                          </children>
+                      </VBox>
+               </children>
+            </HBox>
                   <Label fx:id="labelTotal" text="Total" textFill="#de0b0b">
                       <font>
                           <Font name="System Bold" size="72.0" />
