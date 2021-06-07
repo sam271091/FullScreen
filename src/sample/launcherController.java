@@ -108,6 +108,7 @@ public class launcherController {
 
                                 event.consume(); // <-- stops passing the event to next node
                                 primaryStage.close();
+                                controller.stopmediaPlayer();
                             }
 
                         }

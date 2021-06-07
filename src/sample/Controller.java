@@ -42,6 +42,12 @@ public class Controller {
 
     private String filePath;
 
+    private MediaPlayer mediaPlayer;
+
+
+    public void stopmediaPlayer(){
+        mediaPlayer.stop();
+    }
 
     @FXML
     void initialize() {
@@ -56,7 +62,7 @@ public class Controller {
         Media media = new Media(new File("C:\\Users\\Администратор\\Desktop\\ad.mp4").toURI().toString());
 
         //Instantiating MediaPlayer class
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer = new MediaPlayer(media);
 
         mediaView.setMediaPlayer(mediaPlayer);
 
