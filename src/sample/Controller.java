@@ -81,7 +81,7 @@ public class Controller {
 
         mediaView.setMediaPlayer(mediaPlayer);
 
-        mediaPlayer.setAutoPlay(true);
+//        mediaPlayer.setAutoPlay(true);
 
         mediaPlayer.getOnRepeat();
 
@@ -141,6 +141,17 @@ public class Controller {
 
             rowString.append(row.toString() + "\n");
         }
+
+        if (rows.length() ==0){
+            mediaPlayer.play();
+            mediaView.setVisible(true);
+            labelTotal.setVisible(false);
+        } else {
+            mediaView.setVisible(false);
+            labelTotal.setVisible(true);
+            mediaPlayer.stop();
+        }
+
 
         LabelInfo.setText(rowString.toString());
         LabelInfo.setWrapText(true);

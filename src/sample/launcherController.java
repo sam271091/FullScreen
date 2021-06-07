@@ -137,7 +137,10 @@ public class launcherController {
                     Controller controller = (Controller) loader.getController();
                     controller.setFilePath(filePath);
                     controller.setVideoFilePath(videoFilePath);
-                    controller.initializePlayer();
+                   if (videoFilePath != null){
+                       controller.initializePlayer();
+                   }
+
 
                     Stage primaryStage = new Stage();
 
