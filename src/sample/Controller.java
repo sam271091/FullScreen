@@ -42,8 +42,14 @@ public class Controller {
 
     private String filePath;
 
+    private String videoFilePath;
+
     private MediaPlayer mediaPlayer;
 
+
+    public void setVideoFilePath(String videoFilePath) {
+        this.videoFilePath = videoFilePath;
+    }
 
     public void stopmediaPlayer(){
         mediaPlayer.stop();
@@ -59,7 +65,16 @@ public class Controller {
         restartStopwatch(LabelInfo);
 
 
-        Media media = new Media(new File("C:\\Users\\Администратор\\Desktop\\ad.mp4").toURI().toString());
+//        if (videoFilePath != null) {
+//            initializePlayer();
+//        }
+
+
+    }
+
+
+    public void initializePlayer(){
+        Media media = new Media(new File(videoFilePath.toString()).toURI().toString());
 
         //Instantiating MediaPlayer class
         mediaPlayer = new MediaPlayer(media);
@@ -87,7 +102,6 @@ public class Controller {
                 mediaPlayer.play();
             }
         });
-
     }
 
 

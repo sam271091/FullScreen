@@ -38,7 +38,16 @@ public class launcherController {
     @FXML
     private Button btnStartFullScreen;
 
+    @FXML
+    private TextField videoPath;
+
+    @FXML
+    private Button btnOpenVideo;
+
     private String filePath;
+
+    private String videoFilePath;
+
 
     @FXML
     void initialize() {
@@ -77,6 +86,41 @@ public class launcherController {
         );
 
 
+        btnOpenVideo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                JFileChooser f = new JFileChooser();
+//                f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                f.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+                f.setFileFilter(new FileFilter() {
+
+                    public String getDescription() {
+                        return "Video files (*.mp4)";
+                    }
+
+                    public boolean accept(File f) {
+                        if (f.isDirectory()) {
+                            return true;
+                        } else {
+                            String filename = f.getName().toLowerCase();
+                            return filename.endsWith(".mp4") || filename.endsWith(".mp4") ;
+                        }
+                    }
+                });
+
+                f.showSaveDialog(null);
+
+                videoFilePath = f.getSelectedFile().toString();
+
+                videoPath.setText(videoFilePath);
+
+
+            }
+        });
+
+
 
 
 
@@ -85,13 +129,22 @@ public class launcherController {
             public void handle(ActionEvent event) {
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
-                try {
-                    Parent root = (Parent)loader.load();
 
-                    Stage primaryStage = new Stage();
+                try {
+
+                    Parent root = (Parent)loader.load();
 
                     Controller controller = (Controller) loader.getController();
                     controller.setFilePath(filePath);
+                    controller.setVideoFilePath(videoFilePath);
+                    controller.initializePlayer();
+
+                    Stage primaryStage = new Stage();
+
+
+
+
+
 
 
                     Scene sc = new Scene(root, 600, 85);
@@ -140,6 +193,8 @@ public class launcherController {
 
 
         PathToTheFile.textProperty().addListener((observable, oldValue, newValue) -> filePath = newValue);
+
+        videoPath.textProperty().addListener((observable, oldValue, newValue) -> videoFilePath = newValue);
 
     }
 }

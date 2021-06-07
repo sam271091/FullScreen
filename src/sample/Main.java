@@ -14,7 +14,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("launcher.fxml"));
 //        primaryStage.setTitle("Hello World");
 //        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.setScene(new Scene(root, 600, 85));
+        primaryStage.setScene(new Scene(root, 600, 115));
 //        primaryStage.setMaximized(true);
 //        primaryStage.setFullScreen(true);
         primaryStage.setResizable(false);

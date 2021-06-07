@@ -5,30 +5,45 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="89.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.launcherController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="113.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.launcherController">
     <top>
-        <HBox prefHeight="37.0" prefWidth="601.0" BorderPane.alignment="CENTER">
+        <VBox prefHeight="109.0" prefWidth="596.0" BorderPane.alignment="CENTER">
             <children>
-                <TextField fx:id="PathToTheFile" prefHeight="25.0" prefWidth="501.0" promptText="specify path to the exchange file">
-                    <HBox.margin>
-                        <Insets left="25.0" right="15.0" top="5.0" />
-                    </HBox.margin>
-                </TextField>
-                <Button fx:id="btnOpen" mnemonicParsing="false" text="Open">
-                    <HBox.margin>
-                        <Insets top="5.0" />
-                    </HBox.margin>
-                </Button>
+                <HBox prefHeight="37.0" prefWidth="601.0">
+                    <children>
+                        <TextField fx:id="PathToTheFile" prefHeight="25.0" prefWidth="501.0" promptText="specify path to the exchange file">
+                            <HBox.margin>
+                                <Insets left="25.0" right="15.0" top="5.0" />
+                            </HBox.margin>
+                        </TextField>
+                        <Button fx:id="btnOpen" mnemonicParsing="false" text="Open">
+                            <HBox.margin>
+                                <Insets top="5.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <TextField fx:id="videoPath" prefWidth="501.0" promptText="specify path to the video file">
+                            <HBox.margin>
+                                <Insets left="25.0" right="15.0" top="5.0" />
+                            </HBox.margin>
+                        </TextField>
+                        <Button fx:id="btnOpenVideo" mnemonicParsing="false" text="Open">
+                            <HBox.margin>
+                                <Insets top="5.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </HBox>
+                <Button fx:id="btnStartFullScreen" mnemonicParsing="false" text="Start fullscreen mode" />
             </children>
-        </HBox>
+        </VBox>
     </top>
-    <left>
-        <Button fx:id="btnStartFullScreen" mnemonicParsing="false" text="Start full-screen mode" BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-                <Insets left="25.0" />
-            </BorderPane.margin>
-        </Button>
-    </left>
 </BorderPane>
