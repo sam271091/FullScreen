@@ -151,7 +151,9 @@ public class launcherController {
 
 
                     Scene sc = new Scene(root, 600, 85);
-                    
+
+
+
                     primaryStage.setScene(sc);
                     primaryStage.setMaximized(true);
                     primaryStage.setFullScreen(true);

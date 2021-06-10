@@ -5,30 +5,38 @@
 <?import javafx.scene.media.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000305;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-    <center>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <center>
         <StackPane BorderPane.alignment="CENTER">
             <children>
-                <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" />
-            <HBox prefHeight="100.0" prefWidth="200.0">
+                <MediaView fx:id="mediaView" fitHeight="100.0" fitWidth="100.0" />
+            <VBox alignment="BOTTOM_CENTER">
                <children>
-                      <VBox>
-                          <children>
-                              <Label fx:id="LabelInfo" alignment="TOP_LEFT" text="Info " textFill="#0be038" wrapText="true">
-                                  <font>
-                                      <Font name="System Bold" size="64.0" />
-                                  </font>
-                              </Label>
-                          </children>
-                      </VBox>
-               </children>
-            </HBox>
-                  <Label fx:id="labelTotal" text="Total" textFill="#de0b0b">
-                      <font>
-                          <Font name="System Bold" size="72.0" />
-                      </font>
+                        <TableView fx:id="itemsTable">
+                            <columns>
+                                <TableColumn fx:id="itemCol" maxWidth="1.7976931348623157E308" prefWidth="300.0" style="-fx-background-color: white; -fx-font-size: 20; -fx-size: 50; -fx-border-color: black;" text="Mal" />
+                                <TableColumn fx:id="quantityCol" maxWidth="1.7976931348623157E308" minWidth="130.0" prefWidth="130.0" style="-fx-background-color: white; -fx-size: 50; -fx-font-size: 20; -fx-border-color: black;" text="Miqdar" />
+                                <TableColumn fx:id="priceCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" style="-fx-background-color: white; -fx-size: 50; -fx-font-size: 20; -fx-border-color: black;" text="Qiymət" />
+                            </columns>
+                        </TableView>
+                  <Label fx:id="resultLabel" text="Result" textFill="#0d0d0d">
+                     <font>
+                        <Font name="Times New Roman Bold" size="72.0" />
+                     </font>
                   </Label>
+                  <Label fx:id="discountLabel" text="Discount" textFill="#0d0d0d">
+                     <font>
+                        <Font name="Times New Roman Bold" size="72.0" />
+                     </font>
+                  </Label>
+                      <Label fx:id="labelTotal" text="Total" textFill="#0d0d0d">
+                          <font>
+                              <Font name="System Bold" size="72.0" />
+                          </font>
+                      </Label>
+               </children>
+            </VBox>
             </children>
         </StackPane>
-    </center>
+   </center>
 </BorderPane>

@@ -2,19 +2,22 @@ package sample;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -40,12 +43,41 @@ public class Controller {
     private MediaView mediaView;
 
 
+    @FXML
+    private Label resultLabel;
+
+    @FXML
+    private Label discountLabel;
+
+
+
     private String filePath;
 
     private String videoFilePath;
 
     private MediaPlayer mediaPlayer;
 
+    private ObservableList<Row> rowsData = FXCollections.observableArrayList();
+
+
+    @FXML
+    private TableView<Row> itemsTable;
+
+    @FXML
+    private TableColumn<Row, String> itemCol;
+
+    @FXML
+    private TableColumn<Row, Double> quantityCol;
+
+    @FXML
+    private TableColumn<Row, Double> priceCol;
+
+
+    private  DoubleProperty width;
+    private  DoubleProperty height;
+
+
+    private boolean isPlaying;
 
     public void setVideoFilePath(String videoFilePath) {
         this.videoFilePath = videoFilePath;
@@ -53,16 +85,37 @@ public class Controller {
 
     public void stopmediaPlayer(){
         mediaPlayer.stop();
+
+
+        width.unbind();
+        height.unbind();
+
     }
+
+
 
     @FXML
     void initialize() {
 
 
+        isPlaying = false;
 
+//        initData();
 
+        itemCol.setCellValueFactory(new PropertyValueFactory<Row, String>("Item"));
+        quantityCol.setCellValueFactory(new PropertyValueFactory<Row, Double>("quantity"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<Row, Double>("price"));
+
+        itemsTable.setItems(rowsData);
+
+        itemsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         restartStopwatch(LabelInfo);
+
+
+         width = mediaView.fitWidthProperty();
+         height = mediaView.fitHeightProperty();
+
 
 
 //        if (videoFilePath != null) {
@@ -71,6 +124,12 @@ public class Controller {
 
 
     }
+
+
+    private void initData(Row row) {
+        rowsData.add(row);
+    }
+
 
 
     public void initializePlayer(){
@@ -86,11 +145,9 @@ public class Controller {
         mediaPlayer.getOnRepeat();
 
 
-        final DoubleProperty width = mediaView.fitWidthProperty();
-        final DoubleProperty height = mediaView.fitHeightProperty();
 
-        width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
-        height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
+
+
 
         mediaView.setPreserveRatio(true);
 
@@ -99,9 +156,27 @@ public class Controller {
             @Override
             public void run() {
                 mediaPlayer.seek(Duration.ZERO);
-                mediaPlayer.play();
+//                mediaPlayer.play();
+                playVideo();
             }
         });
+    }
+
+
+    private void playVideo(){
+
+
+        width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
+        height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
+
+
+
+        mediaPlayer.play();
+
+        mediaView.setVisible(true);
+
+        isPlaying = true;
+
     }
 
 
@@ -133,32 +208,68 @@ public class Controller {
 
         JSONArray rows = jobject.getJSONArray("rows");
 
-        Double total = jobject.getDouble("Total");
+        Double result = jobject.getDouble("result");
+
+        Double discount = jobject.getDouble("discount");
+
+        Double total = jobject.getDouble("total");
+
+        rowsData.clear();
 
         StringBuilder rowString = new StringBuilder();
         for (int i =0;i<rows.length();i++) {
-            String row = rows.get(i).toString();
+            JSONObject row = (JSONObject) rows.get(i);
+//
+            initData(new Row(row.getString("item").toString(),row.getDouble("quantity"),row.getDouble("price")));
 
-            rowString.append(row.toString() + "\n");
+
+
+
+
+//            rowString.append(row.toString() + "\n");
+//            JSONObject row = jobject.getJSONObject("");
+
         }
 
+        resultLabel.setText("Yekun: " + Double.toString(result));
+        resultLabel.setWrapText(true);
+
+        discountLabel.setText("Endirim: " + Double.toString(discount));
+        discountLabel.setWrapText(true);
+
+
+        labelTotal.setText("Ödəniləcək məbləğ: " + Double.toString(total));
+        labelTotal.setWrapText(true);
+
+
         if (rows.length() ==0){
-            mediaPlayer.play();
-            mediaView.setVisible(true);
+            if (! isPlaying){
+                playVideo();
+            }
+            itemsTable.setVisible(false);
+            resultLabel.setVisible(false);
+            discountLabel.setVisible(false);
             labelTotal.setVisible(false);
         } else {
             mediaView.setVisible(false);
+            itemsTable.setVisible(true);
+
+            resultLabel.setVisible(true);
+            discountLabel.setVisible(true);
             labelTotal.setVisible(true);
-            mediaPlayer.stop();
+
+//            mediaPlayer.stop();
+            stopmediaPlayer();
+            isPlaying = false;
+
         }
 
 
-        LabelInfo.setText(rowString.toString());
-        LabelInfo.setWrapText(true);
+//        LabelInfo.setText(rowString.toString());
+//        LabelInfo.setWrapText(true);
 
 
-        labelTotal.setText(Double.toString(total));
-        labelTotal.setWrapText(true);
+
     }
 
 
