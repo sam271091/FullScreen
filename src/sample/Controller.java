@@ -2,7 +2,8 @@ package sample;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,6 +19,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -49,6 +54,20 @@ public class Controller {
     @FXML
     private Label discountLabel;
 
+    @FXML
+    private HBox header;
+
+    @FXML
+    private Label cardNumber;
+
+    @FXML
+    private HBox headerDate;
+
+    @FXML
+    private Label currDate;
+
+    @FXML
+    private VBox footer;
 
 
     private String filePath;
@@ -59,9 +78,13 @@ public class Controller {
 
     private ObservableList<Row> rowsData = FXCollections.observableArrayList();
 
+    private LocalDateTime currentDate;
 
     @FXML
     private TableView<Row> itemsTable;
+
+    @FXML
+    private TableColumn<Row, Integer> colNo;
 
     @FXML
     private TableColumn<Row, String> itemCol;
@@ -71,6 +94,22 @@ public class Controller {
 
     @FXML
     private TableColumn<Row, Double> priceCol;
+
+    @FXML
+    private TableColumn<Row, Double> sumCol;
+
+
+    @FXML
+    private VBox mainScreen;
+
+    @FXML
+    private ImageView IOS_PIC;
+
+    @FXML
+    private ImageView AND_PIC;
+
+    @FXML
+    private ImageView LOGO;
 
 
     private  DoubleProperty width;
@@ -98,13 +137,19 @@ public class Controller {
     void initialize() {
 
 
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        currentDate = LocalDateTime.now();
+
+
         isPlaying = false;
 
 //        initData();
 
+        colNo.setCellValueFactory(new PropertyValueFactory<Row, Integer>("num"));
         itemCol.setCellValueFactory(new PropertyValueFactory<Row, String>("Item"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<Row, Double>("quantity"));
         priceCol.setCellValueFactory(new PropertyValueFactory<Row, Double>("price"));
+        sumCol.setCellValueFactory(new PropertyValueFactory<Row, Double>("sum"));
 
         itemsTable.setItems(rowsData);
 
@@ -117,10 +162,15 @@ public class Controller {
          height = mediaView.fitHeightProperty();
 
 
+        currDate.setText(dtf.format(currentDate));
 
-//        if (videoFilePath != null) {
-//            initializePlayer();
-//        }
+
+        IOS_PIC.setImage(new Image("/sample/ios.png"));
+        AND_PIC.setImage(new Image("/sample/pic2.png"));
+        LOGO.setImage(new Image("/sample/logo_pic.png"));
+
+
+
 
 
     }
@@ -214,13 +264,15 @@ public class Controller {
 
         Double total = jobject.getDouble("total");
 
+        String CNumber = jobject.getString("cardNumber");
+
         rowsData.clear();
 
         StringBuilder rowString = new StringBuilder();
         for (int i =0;i<rows.length();i++) {
             JSONObject row = (JSONObject) rows.get(i);
 //
-            initData(new Row(row.getString("item").toString(),row.getDouble("quantity"),row.getDouble("price")));
+            initData(new Row(row.getInt("num"),row.getString("item").toString(),row.getDouble("quantity"),row.getDouble("price"),row.getDouble("sum")));
 
 
 
@@ -231,14 +283,17 @@ public class Controller {
 
         }
 
-        resultLabel.setText("Yekun: " + Double.toString(result));
-        resultLabel.setWrapText(true);
+//        resultLabel.setText("Yekun: " + Double.toString(result));
+//        resultLabel.setWrapText(true);
 
-        discountLabel.setText("Endirim: " + Double.toString(discount));
+        cardNumber.setText(CNumber.toString());
+        cardNumber.setWrapText(true);
+
+        discountLabel.setText(Double.toString(discount));
         discountLabel.setWrapText(true);
 
 
-        labelTotal.setText("Ödəniləcək məbləğ: " + Double.toString(total));
+        labelTotal.setText(Double.toString(total));
         labelTotal.setWrapText(true);
 
 
@@ -247,14 +302,24 @@ public class Controller {
                 playVideo();
             }
             itemsTable.setVisible(false);
-            resultLabel.setVisible(false);
+            header.setVisible(false);
+            headerDate.setVisible(false);
+            footer.setVisible(false);
+//            resultLabel.setVisible(false);
             discountLabel.setVisible(false);
             labelTotal.setVisible(false);
+
+            mainScreen.setVisible(false);
+
         } else {
+            mainScreen.setVisible(true);
             mediaView.setVisible(false);
             itemsTable.setVisible(true);
 
-            resultLabel.setVisible(true);
+            header.setVisible(true);
+            headerDate.setVisible(true);
+            footer.setVisible(true);
+//            resultLabel.setVisible(true);
             discountLabel.setVisible(true);
             labelTotal.setVisible(true);
 
