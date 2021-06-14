@@ -100,6 +100,9 @@ public class Controller {
 
 
     @FXML
+    private VBox mainBox;
+
+    @FXML
     private VBox mainScreen;
 
     @FXML
@@ -311,7 +314,10 @@ public class Controller {
 
             mainScreen.setVisible(false);
 
+            mainBox.setVisible(false);
+
         } else {
+            mainBox.setVisible(true);
             mainScreen.setVisible(true);
             mediaView.setVisible(false);
             itemsTable.setVisible(true);

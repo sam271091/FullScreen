@@ -12,7 +12,7 @@
         <StackPane BorderPane.alignment="CENTER">
             <children>
                 <MediaView fx:id="mediaView" fitHeight="100.0" fitWidth="100.0" />
-            <VBox style="-fx-background-color: red;">
+            <VBox fx:id="mainBox" style="-fx-background-color: red;">
                <children>
                       <VBox fx:id="mainScreen" alignment="BOTTOM_CENTER" prefWidth="1155.0" style="-fx-border-color: red; -fx-background-color: white; -fx-border-width: 20; -fx-border-radius: 20; -fx-background-radius: 50;">
                           <children>
