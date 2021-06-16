@@ -1,9 +1,8 @@
 package sample;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -259,7 +258,7 @@ public class launcherController {
 
 
     public void writeFile(){
-        FileWriter myWriter = null;
+        OutputStreamWriter myWriter = null;
         try {
 
             String jsonString = new JSONObject()
@@ -267,8 +266,12 @@ public class launcherController {
                     .put("videoFilePath", videoFilePath)
                     .toString();
 
+            String filename = defaultBaseDir + "/setups.txt";
 
-            myWriter = new FileWriter(defaultBaseDir + "/setups.txt");
+//            myWriter = new FileWriter(filename);
+
+            myWriter = new OutputStreamWriter(new FileOutputStream(new File(filename)), StandardCharsets.UTF_8);
+
             myWriter.write(jsonString);
             myWriter.close();
 
