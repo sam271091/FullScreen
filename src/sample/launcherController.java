@@ -220,19 +220,22 @@ public class launcherController {
 
 
 
-        JSONObject jobject = new JSONObject(filecontents.trim());
+        if (filecontents != null){
+            JSONObject jobject = new JSONObject(filecontents.trim());
 
-        if (jobject.has("videoFilePath")){
-            videoFilePath = jobject.getString("videoFilePath");
+            if (jobject.has("videoFilePath")){
+                videoFilePath = jobject.getString("videoFilePath");
 
-            videoPath.setText(videoFilePath);
+                videoPath.setText(videoFilePath);
 
+            }
+
+            if (jobject.has("filePath")){
+                filePath = jobject.getString("filePath");
+                PathToTheFile.setText(filePath);
+            }
         }
 
-        if (jobject.has("filePath")){
-            filePath = jobject.getString("filePath");
-            PathToTheFile.setText(filePath);
-        }
 
     }
 
