@@ -1,6 +1,8 @@
 package sample;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -115,8 +117,14 @@ public class Controller {
     private ImageView LOGO;
 
 
+    @FXML
+    private Label labelEndOfSale;
+
     private  DoubleProperty width;
     private  DoubleProperty height;
+
+
+    private int counter;
 
 
     private boolean isPlaying;
@@ -142,6 +150,7 @@ public class Controller {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         currentDate = LocalDateTime.now();
+
 
 
         isPlaying = false;
@@ -176,7 +185,14 @@ public class Controller {
 
 
 
+
+
     }
+
+
+
+
+
 
 
     private void initData(Row row) {
@@ -257,9 +273,83 @@ public class Controller {
     private void setLabel() {
         String filecontents = ReadFromFile.ReadFile(filePath);
 
-        JSONObject jobject = new JSONObject(filecontents);
+
+
+        JSONObject jobject = new JSONObject(filecontents.trim());
 
         JSONArray rows = jobject.getJSONArray("rows");
+
+
+
+
+        if (rows.length() ==0){
+
+            counter++;
+
+            if (counter >3){
+
+                fillIndata(jobject,rows);
+
+                if (! isPlaying){
+                    playVideo();
+                }
+                itemsTable.setVisible(false);
+                header.setVisible(false);
+                headerDate.setVisible(false);
+                footer.setVisible(false);
+//            resultLabel.setVisible(false);
+                discountLabel.setVisible(false);
+                labelTotal.setVisible(false);
+
+                mainScreen.setVisible(false);
+
+                mainBox.setVisible(false);
+            } else {
+                labelEndOfSale.setVisible(true);
+            }
+
+
+
+        } else {
+
+            fillIndata(jobject,rows);
+
+            counter = 0;
+
+            labelEndOfSale.setVisible(false);
+
+            mainBox.setVisible(true);
+            mainScreen.setVisible(true);
+            mediaView.setVisible(false);
+            itemsTable.setVisible(true);
+
+            header.setVisible(true);
+            headerDate.setVisible(true);
+            footer.setVisible(true);
+//            resultLabel.setVisible(true);
+            discountLabel.setVisible(true);
+            labelTotal.setVisible(true);
+
+//            mediaPlayer.stop();
+            stopmediaPlayer();
+            isPlaying = false;
+
+        }
+
+
+//        LabelInfo.setText(rowString.toString());
+//        LabelInfo.setWrapText(true);
+
+
+
+    }
+
+
+
+    private void fillIndata(JSONObject jobject,JSONArray rows){
+
+
+
 
         Double result = jobject.getDouble("result");
 
@@ -298,49 +388,6 @@ public class Controller {
 
         labelTotal.setText(Double.toString(total));
         labelTotal.setWrapText(true);
-
-
-        if (rows.length() ==0){
-            if (! isPlaying){
-                playVideo();
-            }
-            itemsTable.setVisible(false);
-            header.setVisible(false);
-            headerDate.setVisible(false);
-            footer.setVisible(false);
-//            resultLabel.setVisible(false);
-            discountLabel.setVisible(false);
-            labelTotal.setVisible(false);
-
-            mainScreen.setVisible(false);
-
-            mainBox.setVisible(false);
-
-        } else {
-            mainBox.setVisible(true);
-            mainScreen.setVisible(true);
-            mediaView.setVisible(false);
-            itemsTable.setVisible(true);
-
-            header.setVisible(true);
-            headerDate.setVisible(true);
-            footer.setVisible(true);
-//            resultLabel.setVisible(true);
-            discountLabel.setVisible(true);
-            labelTotal.setVisible(true);
-
-//            mediaPlayer.stop();
-            stopmediaPlayer();
-            isPlaying = false;
-
-        }
-
-
-//        LabelInfo.setText(rowString.toString());
-//        LabelInfo.setWrapText(true);
-
-
-
     }
 
 

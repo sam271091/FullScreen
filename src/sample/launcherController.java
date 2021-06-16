@@ -1,6 +1,7 @@
 package sample;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -48,10 +50,17 @@ public class launcherController {
 
     private String videoFilePath;
 
+    private String defaultBaseDir;
+
+
+
 
     @FXML
     void initialize() {
 
+        defaultBaseDir = System.getProperty("java.io.tmpdir");
+
+        fillinSetups();
 
         btnOpen.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -131,6 +140,9 @@ public class launcherController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
 
                 try {
+                    if (filePath != null ){
+                      CreateFile();
+                     }
 
                     Parent root = (Parent)loader.load();
 
@@ -202,5 +214,70 @@ public class launcherController {
         videoPath.textProperty().addListener((observable, oldValue, newValue) -> videoFilePath = newValue);
 
     }
+
+
+    private void fillinSetups(){
+        String filecontents = ReadFromFile.ReadFile(defaultBaseDir + "/setups.txt");
+
+
+
+        JSONObject jobject = new JSONObject(filecontents.trim());
+
+        if (jobject.has("videoFilePath")){
+            videoFilePath = jobject.getString("videoFilePath");
+
+            videoPath.setText(videoFilePath);
+
+        }
+
+        if (jobject.has("filePath")){
+            filePath = jobject.getString("filePath");
+            PathToTheFile.setText(filePath);
+        }
+
+    }
+
+
+
+
+    public  void CreateFile() {
+
+
+        try {
+            File myObj = new File(defaultBaseDir + "/setups.txt");
+            if (myObj.createNewFile()) {
+//                    System.out.println("File created: " + myObj.getName());
+            } else {
+//                    System.out.println("File already exists.");
+            }
+            writeFile();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void writeFile(){
+        FileWriter myWriter = null;
+        try {
+
+            String jsonString = new JSONObject()
+                    .put("filePath", filePath)
+                    .put("videoFilePath", videoFilePath)
+                    .toString();
+
+
+            myWriter = new FileWriter(defaultBaseDir + "/setups.txt");
+            myWriter.write(jsonString);
+            myWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 }
 
