@@ -5,17 +5,20 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.json.JSONObject;
 
@@ -148,9 +151,11 @@ public class launcherController {
                     Controller controller = (Controller) loader.getController();
                     controller.setFilePath(filePath);
                     controller.setVideoFilePath(videoFilePath);
-                   if (videoFilePath != null){
+                   if (videoFilePath != null && !videoFilePath.equals("")){
                        controller.initializePlayer();
                    }
+
+                    ObservableList<Screen> screens = Screen.getScreens();
 
 
                     Stage primaryStage = new Stage();
@@ -164,16 +169,35 @@ public class launcherController {
                     Scene sc = new Scene(root, 600, 85);
 
 
+                    if (screens.size() > 1) {
 
-                    primaryStage.setScene(sc);
+                        Rectangle2D bounds = screens.get(1).getVisualBounds();
+                        primaryStage.setX(bounds.getMinX());
+                        primaryStage.setY(bounds.getMinY());
+
+
+                        primaryStage.setScene(sc);
+                        primaryStage.setMaximized(true);
+                        primaryStage.setFullScreen(true);
+                        primaryStage.setResizable(false);
+                    } else {
+
+                        primaryStage.setScene(sc);
                     primaryStage.setMaximized(true);
                     primaryStage.setFullScreen(true);
                     primaryStage.setResizable(false);
+                    }
+
+
+
+//
 
                     sc.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
                         @Override
                         public void handle(KeyEvent event) {
                             if (event.getCode() == KeyCode.ESCAPE) {
+
+
 
                                 event.consume(); // <-- stops passing the event to next node
                                 primaryStage.close();

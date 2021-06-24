@@ -15,6 +15,7 @@ import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -183,6 +184,12 @@ public class Controller {
 
 
 
+        itemsTable.getItems().addListener(new ListChangeListener<Row>() {
+            @Override
+            public void onChanged(Change<? extends Row> c) {
+                itemsTable.scrollTo(c.getList().size()-1);
+            }
+        });
 
 
 
@@ -280,11 +287,12 @@ public class Controller {
         JSONArray rows = jobject.getJSONArray("rows");
 
 
+        counter++;
 
 
         if (rows.length() ==0){
 
-            counter++;
+
 
             if (counter >3){
 

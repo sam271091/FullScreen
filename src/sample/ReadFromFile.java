@@ -8,17 +8,27 @@ public class ReadFromFile {
         File file = new File(filePath);
 
 
+
         BufferedReader br = null;
         try {
 //
             if (file.exists()){
-                br = new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
+
+                FileInputStream fis = new FileInputStream(file);
+
+                InputStreamReader iSr = new InputStreamReader(fis,"UTF-8");
+
+                br = new BufferedReader(iSr);
                 StringBuilder sb = new StringBuilder();
                 String st;
                 while ((st = br.readLine()) != null) {
                     sb.append(st.toString());
 //
                 }
+
+                fis.close();
+                iSr.close();
+                br.close();
 
                 return sb.toString().trim();
             } else {
