@@ -5,6 +5,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,9 +18,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.json.JSONObject;
 
 import javax.swing.*;
@@ -161,6 +165,7 @@ public class launcherController {
                     Stage primaryStage = new Stage();
 
 
+                    primaryStage.setFullScreenExitKeyCombination(KeyCombination.keyCombination("CTRL+E"));
 
 
 
@@ -195,13 +200,19 @@ public class launcherController {
                     sc.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
                         @Override
                         public void handle(KeyEvent event) {
-                            if (event.getCode() == KeyCode.ESCAPE) {
+
+                            final KeyCombination kb = new KeyCodeCombination(KeyCode.E, KeyCombination.CONTROL_DOWN);
+
+                            if (kb.match(event)) {
 
 
 
                                 event.consume(); // <-- stops passing the event to next node
                                 primaryStage.close();
                                 controller.stopmediaPlayer();
+
+                                Platform.exit();
+                                System.exit(0);
                             }
 
                         }
@@ -237,6 +248,7 @@ public class launcherController {
         videoPath.textProperty().addListener((observable, oldValue, newValue) -> videoFilePath = newValue);
 
     }
+
 
 
     private void fillinSetups(){

@@ -1,10 +1,13 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import javafx.stage.WindowEvent;
 
 public class Main extends Application {
 
@@ -19,8 +22,17 @@ public class Main extends Application {
 //        primaryStage.setFullScreen(true);
         primaryStage.setResizable(false);
         primaryStage.show();
+
+
+
     }
 
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        Platform.exit();
+        System.exit(0);
+    }
 
     public static void main(String[] args) {
         launch(args);
