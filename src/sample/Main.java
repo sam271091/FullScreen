@@ -2,6 +2,7 @@ package sample;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,9 +24,20 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
+        Window wondow = primaryStage.getScene().getWindow();
+
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent e) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
 
 
     }
+
+
 
     @Override
     public void stop() throws Exception {
