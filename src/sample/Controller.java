@@ -184,6 +184,14 @@ public class Controller {
 
 
 
+        itemsTable.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY );
+        colNo.setMaxWidth( 1f * Integer.MAX_VALUE * 5 ); // 50% width
+        itemCol.setMaxWidth( 1f * Integer.MAX_VALUE * 70 ); // 30% width
+        quantityCol.setMaxWidth( 1f * Integer.MAX_VALUE * 8 ); // 20% width
+        priceCol.setMaxWidth( 1f * Integer.MAX_VALUE * 8 ); // 20% width
+        sumCol.setMaxWidth( 1f * Integer.MAX_VALUE * 9 ); // 20% width
+
+
         itemsTable.getItems().addListener(new ListChangeListener<Row>() {
             @Override
             public void onChanged(Change<? extends Row> c) {

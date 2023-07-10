@@ -16,6 +16,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
@@ -58,6 +59,9 @@ public class launcherController {
 
     private String defaultBaseDir;
 
+    @FXML
+    private ComboBox screensSelector;
+
 
 
 
@@ -99,6 +103,18 @@ public class launcherController {
             }
         }
         );
+
+
+        ObservableList<Screen> screens = Screen.getScreens();
+
+        screensSelector.getItems().clear();
+
+        for (int i = 1; screens.size() >= i;i++){
+            screensSelector.getItems().add(i);
+        }
+
+        screensSelector.setValue(1);
+
 
 
         btnOpenVideo.setOnAction(new EventHandler<ActionEvent>() {
@@ -159,7 +175,7 @@ public class launcherController {
                        controller.initializePlayer();
                    }
 
-                    ObservableList<Screen> screens = Screen.getScreens();
+//                    ObservableList<Screen> screens = Screen.getScreens();
 
 
                     Stage primaryStage = new Stage();
@@ -174,9 +190,11 @@ public class launcherController {
                     Scene sc = new Scene(root, 600, 85);
 
 
+                    int selectedScreen = (int) screensSelector.getValue();
+
                     if (screens.size() > 1) {
 
-                        Rectangle2D bounds = screens.get(1).getVisualBounds();
+                        Rectangle2D bounds = screens.get(selectedScreen-1).getVisualBounds();
                         primaryStage.setX(bounds.getMinX());
                         primaryStage.setY(bounds.getMinY());
 

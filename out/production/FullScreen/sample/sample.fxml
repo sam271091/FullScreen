@@ -1,33 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.media.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="707.0" prefWidth="794.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <center>
         <StackPane BorderPane.alignment="CENTER">
             <children>
                 <MediaView fx:id="mediaView" fitHeight="100.0" fitWidth="100.0" />
-                <VBox fx:id="mainBox" style="-fx-background-color: red;">
+                <VBox fx:id="mainBox" style="-fx-background-color: green;">
                     <children>
-                        <VBox fx:id="mainScreen" alignment="BOTTOM_CENTER" prefWidth="1155.0" style="-fx-border-color: red; -fx-background-color: white; -fx-border-width: 20; -fx-border-radius: 20; -fx-background-radius: 50;">
+                        <VBox fx:id="mainScreen" alignment="BOTTOM_CENTER" prefWidth="1155.0" style="-fx-border-color: green; -fx-background-color: white; -fx-border-width: 20; -fx-border-radius: 20; -fx-background-radius: 50;">
                             <children>
+                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="45.0" prefWidth="749.0" style="-fx-alignment: CENTER;" text="Добро пожаловать!" textAlignment="CENTER" textFill="#ff3406">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
                                 <HBox fx:id="header" alignment="TOP_RIGHT">
                                     <children>
                                         <HBox alignment="TOP_RIGHT" style="-fx-border-color: black; -fx-border-width: 2;">
                                             <children>
-                                                <Label text="Müştərinin kart nömrəsi:" textAlignment="CENTER">
+                                                <Label text="Номер карты клиента:" textAlignment="CENTER">
                                                     <font>
-                                                        <Font name="System Bold" size="32.0" />
+                                                        <Font name="System Bold" size="18.0" />
                                                     </font>
                                                 </Label>
                                                 <Label fx:id="cardNumber" text="                                      " textAlignment="CENTER">
                                                     <font>
-                                                        <Font name="System Bold" size="32.0" />
+                                                        <Font name="System Bold" size="18.0" />
                                                     </font>
                                                 </Label>
                                             </children>
@@ -42,7 +57,7 @@
                                 </HBox>
                                 <HBox fx:id="headerDate" prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <Label fx:id="currDate" text="Date">
+                                        <Label fx:id="currDate" text="Дата">
                                             <font>
                                                 <Font name="System Bold" size="24.0" />
                                             </font>
@@ -54,11 +69,11 @@
                                 </HBox>
                                 <TableView fx:id="itemsTable" focusTraversable="false">
                                     <columns>
-                                        <TableColumn fx:id="colNo" maxWidth="1.7976931348623157E308" minWidth="15.0" prefWidth="15.0" style="-fx-background-color: white; -fx-font-size: 30; -fx-size: 25; -fx-border-color: black;" text="№" />
-                                        <TableColumn fx:id="itemCol" maxWidth="1.7976931348623157E308" minWidth="450.0" prefWidth="450.0" style="-fx-background-color: white; -fx-font-size: 30; -fx-size: 25; -fx-border-color: black;" text="Malın adı" />
-                                        <TableColumn fx:id="quantityCol" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" style="-fx-background-color: white; -fx-size: 30; -fx-font-size: 25; -fx-border-color: black;" text="Miqdarı" />
-                                        <TableColumn fx:id="priceCol" maxWidth="1.7976931348623157E308" minWidth="105.0" prefWidth="105.0" style="-fx-background-color: white; -fx-size: 30; -fx-font-size: 25; -fx-border-color: black;" text="Qiyməti" />
-                                        <TableColumn fx:id="sumCol" maxWidth="1.7976931348623157E308" minWidth="105.0" prefWidth="105.0" style="-fx-background-color: white; -fx-size: 30; -fx-font-size: 25; -fx-border-color: black;" text="Toplam" />
+                                        <TableColumn fx:id="colNo" maxWidth="1.7976931348623157E308" minWidth="15.0" prefWidth="15.0" style="-fx-background-color: white; -fx-font-size: 15; -fx-size: 15; -fx-border-color: black;" text="№" />
+                                        <TableColumn fx:id="itemCol" maxWidth="1.7976931348623157E308" minWidth="450.0" prefWidth="450.0" style="-fx-background-color: white; -fx-font-size: 15; -fx-size: 15; -fx-border-color: black;" text="Товар" />
+                                        <TableColumn fx:id="quantityCol" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" style="-fx-background-color: white; -fx-size: 15; -fx-font-size: 15; -fx-border-color: black; -fx-alignment: CENTER-RIGHT;" text="Количество" />
+                                        <TableColumn fx:id="priceCol" maxWidth="1.7976931348623157E308" minWidth="105.0" prefWidth="105.0" style="-fx-background-color: white; -fx-size: 15; -fx-font-size: 15; -fx-border-color: black; -fx-alignment: CENTER-RIGHT;" text="Цена" />
+                                        <TableColumn fx:id="sumCol" maxWidth="1.7976931348623157E308" minWidth="105.0" prefWidth="105.0" style="-fx-background-color: white; -fx-size: 15; -fx-font-size: 15; -fx-border-color: black; -fx-alignment: CENTER-RIGHT;" text="Сумма" />
                                     </columns>
                                     <columnResizePolicy>
                                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -75,9 +90,9 @@
                                                     <children>
                                                         <HBox alignment="TOP_RIGHT" style="-fx-border-color: black; -fx-border-width: 2;">
                                                             <children>
-                                                                <Label text="ENDIRIM:" textFill="#f50303">
+                                                                <Label text="Скидка:" textFill="#f50303">
                                                                     <font>
-                                                                        <Font name="Times New Roman Bold" size="25.0" />
+                                                                        <Font name="Times New Roman Bold" size="18.0" />
                                                                     </font>
                                                                     <HBox.margin>
                                                                         <Insets />
@@ -88,7 +103,7 @@
                                                                 </Label>
                                                                 <Label fx:id="discountLabel" text="Discount" textFill="#f50303">
                                                                     <font>
-                                                                        <Font name="Times New Roman Bold" size="25.0" />
+                                                                        <Font name="Times New Roman Bold" size="18.0" />
                                                                     </font>
                                                                     <HBox.margin>
                                                                         <Insets right="10.0" />
@@ -101,9 +116,9 @@
                                                         </HBox>
                                                         <HBox alignment="TOP_RIGHT" style="-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #FFB337;">
                                                             <children>
-                                                                <Label text="Ödəniləcək məbləğ:">
+                                                                <Label text="Сумма к оплате:">
                                                                     <font>
-                                                                        <Font name="System Bold" size="25.0" />
+                                                                        <Font name="System Bold" size="18.0" />
                                                                     </font>
                                                                     <padding>
                                                                         <Insets left="20.0" right="20.0" />
@@ -111,7 +126,7 @@
                                                                 </Label>
                                                                 <Label fx:id="labelTotal" text="Total" textFill="#0d0d0d">
                                                                     <font>
-                                                                        <Font name="System Bold" size="25.0" />
+                                                                        <Font name="System Bold" size="18.0" />
                                                                     </font>
                                                                     <padding>
                                                                         <Insets left="20.0" right="20.0" />
@@ -122,9 +137,9 @@
                                                                 <Insets right="20.0" />
                                                             </VBox.margin>
                                                         </HBox>
-                                                        <Label fx:id="labelEndOfSale" text="Satış yekunlaşdı" textAlignment="CENTER" textFill="RED">
+                                                        <Label fx:id="labelEndOfSale" text="Продажа завершена" textAlignment="CENTER" textFill="RED">
                                                             <font>
-                                                                <Font name="System Bold" size="34.0" />
+                                                                <Font name="System Bold" size="24.0" />
                                                             </font>
                                                             <VBox.margin>
                                                                 <Insets left="300.0" />
