@@ -178,10 +178,12 @@ public class Controller {
         currDate.setText(dtf.format(currentDate));
 
 
-        IOS_PIC.setImage(new Image("/sample/ios.png"));
-        AND_PIC.setImage(new Image("/sample/pic2.png"));
+//        IOS_PIC.setImage(new Image("/sample/ios.png"));
+//        AND_PIC.setImage(new Image("/sample/pic2.png"));
         LOGO.setImage(new Image("/sample/logo_pic.png"));
 
+
+        itemsTable.setMaxWidth(1f * Integer.MAX_VALUE * 70);
 
 
         itemsTable.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY );
@@ -190,6 +192,10 @@ public class Controller {
         quantityCol.setMaxWidth( 1f * Integer.MAX_VALUE * 8 ); // 20% width
         priceCol.setMaxWidth( 1f * Integer.MAX_VALUE * 8 ); // 20% width
         sumCol.setMaxWidth( 1f * Integer.MAX_VALUE * 9 ); // 20% width
+
+
+
+        itemsTable.setPrefHeight(1f * Integer.MAX_VALUE * 70);
 
 
         itemsTable.getItems().addListener(new ListChangeListener<Row>() {
