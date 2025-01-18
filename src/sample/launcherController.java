@@ -176,8 +176,6 @@ public class launcherController {
                        controller.initializePlayer();
                    }
 
-//                    ObservableList<Screen> screens = Screen.getScreens();
-
 
                     Stage primaryStage = new Stage();
 
@@ -242,21 +240,6 @@ public class launcherController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-
-
-
-
-
-
-//                Parent root = null;
-//                try {
-////                    root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-
 
             }
         });
@@ -326,7 +309,6 @@ public class launcherController {
 
             String filename = defaultBaseDir + "/setups.txt";
 
-//            myWriter = new FileWriter(filename);
 
             myWriter = new OutputStreamWriter(new FileOutputStream(new File(filename)), StandardCharsets.UTF_8);
 

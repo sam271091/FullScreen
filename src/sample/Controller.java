@@ -160,7 +160,6 @@ public class Controller {
             return stream
                     .filter(file -> !Files.isDirectory(file)
                     && file.getFileName().toString().endsWith(".mp4"))
-//                    .map(Path::getFileName)
                     .map(Path::toString)
                     .collect(Collectors.toList());
         }
@@ -175,11 +174,7 @@ public class Controller {
         currentDate = LocalDateTime.now();
 
 
-
-
         isPlaying = false;
-
-//        initData();
 
         colNo.setCellValueFactory(new PropertyValueFactory<Row, Integer>("num"));
         itemCol.setCellValueFactory(new PropertyValueFactory<Row, String>("Item"));
@@ -201,8 +196,7 @@ public class Controller {
         currDate.setText(dtf.format(currentDate));
 
 
-//        IOS_PIC.setImage(new Image("/sample/ios.png"));
-//        AND_PIC.setImage(new Image("/sample/pic2.png"));
+
         LOGO.setImage(new Image("/sample/logo_pic.png"));
 
 
@@ -228,13 +222,7 @@ public class Controller {
             }
         });
 
-
-
-
     }
-
-
-
 
 
 
@@ -286,49 +274,7 @@ public class Controller {
             throw new RuntimeException(e);
         }
 
-//        if (firstMediaInit){
-//            lastPlayedVideoFile = 0;
-//        } else {
-//            lastPlayedVideoFile = +lastPlayedVideoFile;
-//            firstMediaInit = false;
-//        }
-//
-//        String CurrentFile = videoFilesList.get(lastPlayedVideoFile).toString();
-//
-//
-//        media = new Media(new File(CurrentFile.toString()).toURI().toString());
-//
-//        //Instantiating MediaPlayer class
-//        mediaPlayer = new MediaPlayer(media);
-//
-//        mediaView.setMediaPlayer(mediaPlayer);
-
-//        mediaPlayer.setAutoPlay(true);
-
         initializeMedia();
-
-//        mediaPlayer.getOnRepeat();
-
-
-
-
-
-
-//        mediaView.setPreserveRatio(true);
-
-
-
-
-//        mediaPlayer.setOnEndOfMedia(new Runnable() {
-//            @Override
-//            public void run() {
-//                initializeMedia();
-////                mediaPlayer.seek(Duration.ZERO);
-////                mediaPlayer.play();
-//                playVideo();
-//            }
-//        });
-
 
     }
 
@@ -447,11 +393,6 @@ public class Controller {
         }
 
 
-//        LabelInfo.setText(rowString.toString());
-//        LabelInfo.setWrapText(true);
-
-
-
     }
 
 
@@ -474,20 +415,10 @@ public class Controller {
         StringBuilder rowString = new StringBuilder();
         for (int i =0;i<rows.length();i++) {
             JSONObject row = (JSONObject) rows.get(i);
-//
             initData(new Row(row.getInt("num"),row.getString("item").toString(),row.getDouble("quantity"),row.getDouble("price"),row.getDouble("sum")));
-
-
-
-
-
-//            rowString.append(row.toString() + "\n");
-//            JSONObject row = jobject.getJSONObject("");
 
         }
 
-//        resultLabel.setText("Yekun: " + Double.toString(result));
-//        resultLabel.setWrapText(true);
 
         cardNumber.setText(CNumber.toString());
         cardNumber.setWrapText(true);
