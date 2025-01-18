@@ -14,6 +14,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
@@ -307,18 +308,22 @@ public class Controller {
     private void restartStopwatch(Label LabelInfo) {
 
 
-        Timer myTimer = new Timer();
+//        Timer myTimer = new Timer();
+//
+//        myTimer.scheduleAtFixedRate(new TimerTask() {
+//            @Override
+//            public void run() {
+//                Timeline timeline = new Timeline();
+//                KeyFrame frame = new KeyFrame(Duration.seconds(1),
+//                        e -> setLabel());
+//                timeline.getKeyFrames().add(frame);
+//                timeline.play();
+//            }
+//        },0,1000);
 
-        myTimer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                Timeline timeline = new Timeline();
-                KeyFrame frame = new KeyFrame(Duration.seconds(1),
-                        e -> setLabel());
-                timeline.getKeyFrames().add(frame);
-                timeline.play();
-            }
-        },0,1000);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> setLabel()));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
     }
 
 
