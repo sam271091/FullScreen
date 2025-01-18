@@ -123,7 +123,7 @@ public class launcherController {
 
                 JFileChooser f = new JFileChooser();
 //                f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                f.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
                 f.setFileFilter(new FileFilter() {
 
@@ -172,6 +172,7 @@ public class launcherController {
                     controller.setFilePath(filePath);
                     controller.setVideoFilePath(videoFilePath);
                    if (videoFilePath != null && !videoFilePath.equals("")){
+                       controller.firstMediaInit = true;
                        controller.initializePlayer();
                    }
 

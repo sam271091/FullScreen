@@ -3,12 +3,16 @@ package sample;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -79,6 +83,8 @@ public class Controller {
 
     private MediaPlayer mediaPlayer;
 
+    private Media media;
+
     private ObservableList<Row> rowsData = FXCollections.observableArrayList();
 
     private LocalDateTime currentDate;
@@ -130,6 +136,11 @@ public class Controller {
 
     private boolean isPlaying;
 
+    List videoFilesList;
+
+    private Integer lastPlayedVideoFile;
+    Boolean firstMediaInit;
+
     public void setVideoFilePath(String videoFilePath) {
         this.videoFilePath = videoFilePath;
     }
@@ -144,6 +155,17 @@ public class Controller {
     }
 
 
+    List<String> getVideoFilesList() throws IOException{
+        try (Stream<Path> stream = Files.list(Paths.get(videoFilePath))) {
+            return stream
+                    .filter(file -> !Files.isDirectory(file)
+                    && file.getFileName().toString().endsWith(".mp4"))
+//                    .map(Path::getFileName)
+                    .map(Path::toString)
+                    .collect(Collectors.toList());
+        }
+    }
+
 
     @FXML
     void initialize() {
@@ -151,6 +173,7 @@ public class Controller {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         currentDate = LocalDateTime.now();
+
 
 
 
@@ -222,34 +245,99 @@ public class Controller {
 
 
 
-    public void initializePlayer(){
-        Media media = new Media(new File(videoFilePath.toString()).toURI().toString());
+    void initializeMedia(){
+        disposePlayer();
+        if (firstMediaInit){
+            lastPlayedVideoFile = 0;
+            firstMediaInit = false;
+        } else {
+            if (lastPlayedVideoFile >= videoFilesList.size()-1){
+                lastPlayedVideoFile = 0;
+            } else {
+                lastPlayedVideoFile = ++lastPlayedVideoFile;
+            }
+
+        }
+
+        String CurrentFile = videoFilesList.get(lastPlayedVideoFile).toString();
+
+
+        media = new Media(new File(CurrentFile.toString()).toURI().toString());
 
         //Instantiating MediaPlayer class
         mediaPlayer = new MediaPlayer(media);
 
+        mediaPlayer.setAutoPlay(true);
+
+        mediaPlayer.setOnEndOfMedia(this::initializeMedia);
+
+        playVideo();
+
         mediaView.setMediaPlayer(mediaPlayer);
+
+    }
+
+
+    public void initializePlayer(){
+
+        try {
+            videoFilesList = getVideoFilesList();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+//        if (firstMediaInit){
+//            lastPlayedVideoFile = 0;
+//        } else {
+//            lastPlayedVideoFile = +lastPlayedVideoFile;
+//            firstMediaInit = false;
+//        }
+//
+//        String CurrentFile = videoFilesList.get(lastPlayedVideoFile).toString();
+//
+//
+//        media = new Media(new File(CurrentFile.toString()).toURI().toString());
+//
+//        //Instantiating MediaPlayer class
+//        mediaPlayer = new MediaPlayer(media);
+//
+//        mediaView.setMediaPlayer(mediaPlayer);
 
 //        mediaPlayer.setAutoPlay(true);
 
-        mediaPlayer.getOnRepeat();
+        initializeMedia();
+
+//        mediaPlayer.getOnRepeat();
 
 
 
 
 
 
-        mediaView.setPreserveRatio(true);
+//        mediaView.setPreserveRatio(true);
 
 
-        mediaPlayer.setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-                mediaPlayer.seek(Duration.ZERO);
-//                mediaPlayer.play();
-                playVideo();
-            }
-        });
+
+
+//        mediaPlayer.setOnEndOfMedia(new Runnable() {
+//            @Override
+//            public void run() {
+//                initializeMedia();
+////                mediaPlayer.seek(Duration.ZERO);
+////                mediaPlayer.play();
+//                playVideo();
+//            }
+//        });
+
+
+    }
+
+
+    private void disposePlayer() {
+        MediaPlayer player = mediaView.getMediaPlayer();
+        if (player != null) {
+            player.dispose(); // release resources
+        }
     }
 
 
