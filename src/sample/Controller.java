@@ -191,7 +191,7 @@ public class Controller {
             @Override
             protected void updateItem(Double value, boolean empty) {
                 super.updateItem(value, empty);
-                setText(empty || value == null ? null : df.format(value));
+                setText(empty || value == null ? null : df.format(value) + " əd");
             }
         });
 

@@ -12,9 +12,9 @@
         <StackPane BorderPane.alignment="CENTER">
             <children>
                 <MediaView fx:id="mediaView" fitHeight="100.0" fitWidth="100.0" />
-                <VBox fx:id="mainBox" style="-fx-background-color: green;">
+                <VBox fx:id="mainBox" style="-fx-background-color: white;">
                     <children>
-                        <VBox fx:id="mainScreen" alignment="BOTTOM_CENTER" style="-fx-border-color: green; -fx-background-color: white; -fx-border-width: 20; -fx-border-radius: 20; -fx-background-radius: 50;">
+                        <VBox fx:id="mainScreen" alignment="BOTTOM_CENTER" style="-fx-border-color: white; -fx-background-color: white; -fx-border-width: 20; -fx-border-radius: 20; -fx-background-radius: 50;">
                             <children>
                                 <HBox fx:id="headerDate">
                                     <children>
@@ -136,9 +136,9 @@
                                                 </VBox>
                                             </children>
                                         </HBox>
-                                        <HBox alignment="TOP_CENTER" style="-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 10;">
+                                        <HBox alignment="TOP_CENTER" style="-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 10;" visible="false">
                                             <children>
-                                                <VBox alignment="TOP_CENTER">
+                                                <VBox alignment="TOP_CENTER" visible="false">
                                                     <children>
                                                         <Label alignment="CENTER" text="www.alinino.az" textAlignment="CENTER">
                                                             <font>
