@@ -16,6 +16,18 @@
                     <children>
                         <VBox fx:id="mainScreen" alignment="BOTTOM_CENTER" style="-fx-border-color: green; -fx-background-color: white; -fx-border-width: 20; -fx-border-radius: 20; -fx-background-radius: 50;">
                             <children>
+                                <HBox fx:id="headerDate">
+                                    <children>
+                                        <Label fx:id="currDate" text="Дата">
+                                            <font>
+                                                <Font name="System Bold" size="24.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets left="20.0" />
+                                    </VBox.margin>
+                                </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
                                             <ImageView fx:id="LOGO" fitHeight="100.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -31,18 +43,6 @@
                                 <HBox fx:id="header" alignment="TOP_RIGHT">
                                     <VBox.margin>
                                         <Insets right="20.0" top="5.0" />
-                                    </VBox.margin>
-                                </HBox>
-                                <HBox fx:id="headerDate">
-                                    <children>
-                                        <Label fx:id="currDate" text="Дата">
-                                            <font>
-                                                <Font name="System Bold" size="24.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets left="20.0" />
                                     </VBox.margin>
                                 </HBox>
                                 <TableView fx:id="itemsTable" focusTraversable="false" style="-fx-border-width: 0;" stylesheets="@table-style.css">
