@@ -47,9 +47,9 @@
                                 </HBox>
                                 <TableView fx:id="itemsTable" focusTraversable="false" style="-fx-border-width: 0;" stylesheets="@table-style.css">
                                     <columns>
-                                        <TableColumn fx:id="colNo" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-background-color: white; -fx-font-size: 20; -fx-size: 15;" text="№" />
-                                        <TableColumn fx:id="itemCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="-1.0" style="-fx-background-color: white; -fx-font-size: 20; -fx-size: 15;" text="Товар" />
-                                        <TableColumn fx:id="quantityCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="-1.0" style="-fx-background-color: white; -fx-size: 15; -fx-font-size: 20; -fx-alignment: CENTER-RIGHT;" text="Количество" />
+                                        <TableColumn fx:id="colNo" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-background-color: white; -fx-font-size: 20; -fx-size: 15; -fx-font-weight: bold;" text="№" />
+                                        <TableColumn fx:id="itemCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="-1.0" style="-fx-background-color: white; -fx-font-size: 20; -fx-size: 15; -fx-font-weight: bold;" text="Товар" />
+                                        <TableColumn fx:id="quantityCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="-1.0" style="-fx-background-color: white; -fx-size: 15; -fx-font-size: 20; -fx-alignment: CENTER-RIGHT; -fx-font-weight: bold;" text="Количество" />
                                         <TableColumn fx:id="priceCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="-1.0" style="-fx-background-color: white; -fx-size: 15; -fx-font-size: 20; -fx-alignment: CENTER-RIGHT;" text="Цена" visible="false" />
                                         <TableColumn fx:id="sumCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="105.0" style="-fx-background-color: white; -fx-size: 15; -fx-font-size: 20; -fx-alignment: CENTER-RIGHT; -fx-font-weight: bold;" text="Сумма" />
                                     </columns>

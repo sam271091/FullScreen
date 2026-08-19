@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="113.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.launcherController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="113.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.launcherController">
     <top>
         <VBox prefHeight="109.0" prefWidth="596.0" BorderPane.alignment="CENTER">
             <children>
@@ -30,7 +25,7 @@
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <TextField fx:id="videoPath" prefWidth="501.0" promptText="specify path to the video file">
+                        <TextField fx:id="videoPath" prefWidth="501.0" promptText="specify path to the video source">
                             <HBox.margin>
                                 <Insets left="25.0" right="15.0" top="5.0" />
                             </HBox.margin>
