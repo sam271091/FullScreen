@@ -1,0 +1,33 @@
+#itemsTable {
+        -fx-border-width: 0;
+        -fx-background-insets: 0;
+        -fx-padding: 0;
+}
+
+#itemsTable .table-cell {
+    -fx-border-color: transparent;
+}
+
+#itemsTable .column-header-background {
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+    -fx-min-height: 0;
+    visibility: hidden;
+}
+
+
+#itemsTable > .virtual-flow > .clipped-container > .sheet {
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
+}
+
+#itemsTable .table-view {
+    -fx-border-width: 0;
+}
+
+#itemsTable .scroll-bar:horizontal {
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+    -fx-min-height: 0;
+    -fx-opacity: 0;
+}
