@@ -8,6 +8,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -24,6 +25,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -182,6 +184,26 @@ public class Controller {
         quantityCol.setCellValueFactory(new PropertyValueFactory<Row, Double>("quantity"));
         priceCol.setCellValueFactory(new PropertyValueFactory<Row, Double>("price"));
         sumCol.setCellValueFactory(new PropertyValueFactory<Row, Double>("sum"));
+
+        quantityCol.setCellFactory(column -> new TableCell<Row, Double>() {
+            private final DecimalFormat df = new DecimalFormat("0.##");
+
+            @Override
+            protected void updateItem(Double value, boolean empty) {
+                super.updateItem(value, empty);
+                setText(empty || value == null ? null : df.format(value));
+            }
+        });
+
+        sumCol.setCellFactory(column -> new TableCell<Row, Double>() {
+            private final DecimalFormat df = new DecimalFormat("0.00");
+
+            @Override
+            protected void updateItem(Double value, boolean empty) {
+                super.updateItem(value, empty);
+                setText(empty || value == null ? null : df.format(value));
+            }
+        });
 
         itemsTable.setItems(rowsData);
 
@@ -425,11 +447,16 @@ public class Controller {
         }
 
 
-        cardNumber.setText(CNumber.toString());
-        cardNumber.setWrapText(true);
+//        cardNumber.setText(CNumber.toString());
+//        cardNumber.setWrapText(true);
+//
+        DecimalFormat df = new DecimalFormat("0.00");
 
-        discountLabel.setText(Double.toString(discount));
-        discountLabel.setWrapText(true);
+        discountLabel.setText(df.format(discount));
+
+
+
+//        discountLabel.setWrapText(true);
 
 
         labelTotal.setText(Double.toString(total));
