@@ -24,6 +24,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import org.json.JSONObject;
 
@@ -155,6 +156,95 @@ public class launcherController {
 
 
 
+//        btnStartFullScreen.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+//
+//                try {
+//                    if (filePath != null ){
+//                      CreateFile();
+//                     }
+//
+//                    Parent root = (Parent)loader.load();
+//
+//                    Controller controller = (Controller) loader.getController();
+//                    controller.setFilePath(filePath);
+//                    controller.setVideoFilePath(videoFilePath);
+//                   if (videoFilePath != null && !videoFilePath.equals("")){
+//                       controller.firstMediaInit = true;
+//                       controller.initializePlayer();
+//                   }
+//
+//
+//                    Stage primaryStage = new Stage();
+//
+//
+//                    primaryStage.setFullScreenExitKeyCombination(KeyCombination.keyCombination("CTRL+E"));
+//
+//
+//
+//
+//
+//                    Scene sc = new Scene(root, 600, 85);
+//
+//
+//                    int selectedScreen = (int) screensSelector.getValue();
+//
+//                    if (screens.size() > 1) {
+//
+//                        Rectangle2D bounds = screens.get(selectedScreen-1).getVisualBounds();
+//                        primaryStage.setX(bounds.getMinX());
+//                        primaryStage.setY(bounds.getMinY());
+//
+//
+//                        primaryStage.setScene(sc);
+//                        primaryStage.setMaximized(true);
+//                        primaryStage.setFullScreen(true);
+//                        primaryStage.setResizable(false);
+//                    } else {
+//
+//                        primaryStage.setScene(sc);
+//                    primaryStage.setMaximized(true);
+//                    primaryStage.setFullScreen(true);
+//                    primaryStage.setResizable(false);
+//                    }
+//
+//
+//
+////
+//
+//                    sc.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+//                        @Override
+//                        public void handle(KeyEvent event) {
+//
+//                            final KeyCombination kb = new KeyCodeCombination(KeyCode.E, KeyCombination.CONTROL_DOWN);
+//
+//                            if (kb.match(event)) {
+//
+//
+//
+//                                event.consume(); // <-- stops passing the event to next node
+//                                primaryStage.close();
+//                                controller.stopmediaPlayer();
+//
+//                                Platform.exit();
+//                                System.exit(0);
+//                            }
+//
+//                        }
+//                    });
+//
+//                    primaryStage.show();
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        });
+
         btnStartFullScreen.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -162,57 +252,42 @@ public class launcherController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
 
                 try {
-                    if (filePath != null ){
-                      CreateFile();
-                     }
+                    if (filePath != null) {
+                        CreateFile();
+                    }
 
-                    Parent root = (Parent)loader.load();
+                    Parent root = (Parent) loader.load();
 
                     Controller controller = (Controller) loader.getController();
                     controller.setFilePath(filePath);
                     controller.setVideoFilePath(videoFilePath);
-                   if (videoFilePath != null && !videoFilePath.equals("")){
-                       controller.firstMediaInit = true;
-                       controller.initializePlayer();
-                   }
-
+                    if (videoFilePath != null && !videoFilePath.equals("")) {
+                        controller.firstMediaInit = true;
+                        controller.initializePlayer();
+                    }
 
                     Stage primaryStage = new Stage();
-
-
-                    primaryStage.setFullScreenExitKeyCombination(KeyCombination.keyCombination("CTRL+E"));
-
-
-
-
+                    primaryStage.initStyle(StageStyle.UNDECORATED);
 
                     Scene sc = new Scene(root, 600, 85);
-
+                    primaryStage.setScene(sc);
 
                     int selectedScreen = (int) screensSelector.getValue();
 
+                    Rectangle2D bounds;
                     if (screens.size() > 1) {
-
-                        Rectangle2D bounds = screens.get(selectedScreen-1).getVisualBounds();
-                        primaryStage.setX(bounds.getMinX());
-                        primaryStage.setY(bounds.getMinY());
-
-
-                        primaryStage.setScene(sc);
-                        primaryStage.setMaximized(true);
-                        primaryStage.setFullScreen(true);
-                        primaryStage.setResizable(false);
+                        bounds = screens.get(selectedScreen - 1).getBounds();
                     } else {
-
-                        primaryStage.setScene(sc);
-                    primaryStage.setMaximized(true);
-                    primaryStage.setFullScreen(true);
-                    primaryStage.setResizable(false);
+                        bounds = Screen.getPrimary().getBounds();
                     }
 
+                    primaryStage.setX(bounds.getMinX());
+                    primaryStage.setY(bounds.getMinY());
+                    primaryStage.setWidth(bounds.getWidth());
+                    primaryStage.setHeight(bounds.getHeight());
 
-
-//
+                    primaryStage.setResizable(false);
+                    primaryStage.setAlwaysOnTop(true);
 
                     sc.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
                         @Override
@@ -221,17 +296,13 @@ public class launcherController {
                             final KeyCombination kb = new KeyCodeCombination(KeyCode.E, KeyCombination.CONTROL_DOWN);
 
                             if (kb.match(event)) {
-
-
-
-                                event.consume(); // <-- stops passing the event to next node
+                                event.consume();
                                 primaryStage.close();
                                 controller.stopmediaPlayer();
 
                                 Platform.exit();
                                 System.exit(0);
                             }
-
                         }
                     });
 
@@ -240,10 +311,8 @@ public class launcherController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
         });
-
 
         PathToTheFile.textProperty().addListener((observable, oldValue, newValue) -> filePath = newValue);
 
