@@ -256,12 +256,12 @@ public class Controller {
 
 
         itemsTable.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY );
-        colNo.setMaxWidth( 1f * Integer.MAX_VALUE * 5 ); // 50% width
-        itemCol.setMaxWidth( 1f * Integer.MAX_VALUE * 70 ); // 30% width
-        quantityCol.setMaxWidth( 1f * Integer.MAX_VALUE * 8 ); // 20% width
-        priceCol.setMaxWidth( 1f * Integer.MAX_VALUE * 8 ); // 20% width
-        discountCol.setMaxWidth( 1f * Integer.MAX_VALUE * 8 ); // 20% width
-        sumCol.setMaxWidth( 1f * Integer.MAX_VALUE * 9 ); // 20% width
+        colNo.setMaxWidth( 1f * Integer.MAX_VALUE * 5 );
+        itemCol.setMaxWidth( 1f * Integer.MAX_VALUE * 45 );
+        quantityCol.setMaxWidth( 1f * Integer.MAX_VALUE * 8 );
+        priceCol.setMaxWidth( 1f * Integer.MAX_VALUE * 8 );
+        discountCol.setMaxWidth( 1f * Integer.MAX_VALUE * 8 );
+        sumCol.setMaxWidth( 1f * Integer.MAX_VALUE * 9 );
 
 
 
