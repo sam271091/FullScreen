@@ -5,15 +5,35 @@ public class Row {
     private String Item;
     private double quantity;
     private double price;
+    private double discount;
+    private double discountPercent;
     private double sum;
 
 
-    public Row(int num,String item, double quantity, double price,double sum) {
+    public Row(int num, String item, double quantity, double price, double discount, double discountPercent, double sum) {
         this.Item = item;
         this.quantity = quantity;
         this.price = price;
         this.num = num;
+        this.discount = discount;
+        this.discountPercent = discountPercent;
         this.sum = sum;
+    }
+
+    public double getDiscountPercent() {
+        return discountPercent;
+    }
+
+    public void setDiscountPercent(double discountPercent) {
+        this.discountPercent = discountPercent;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 
     public int getNum() {

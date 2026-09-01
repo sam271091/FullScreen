@@ -1,28 +1,50 @@
-#itemsTable {
-        -fx-border-width: 0;
-        -fx-background-insets: 0;
-        -fx-padding: 0;
+.table-view {
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+    -fx-background-color: white;
 }
 
-#itemsTable .table-cell {
+.table-view .column-header-background {
+    -fx-background-color: white;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-background-color: white;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #e63946;
+}
+
+.table-view .column-header .label {
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-table-cell-border-color: transparent;
+    -fx-border-color: transparent transparent #c4c4c4 transparent;
+    -fx-border-width: 0 0 1.5 0;
+    -fx-border-style: segments(3, 3) line-cap butt;
+    -fx-cell-size: 55px;
+}
+
+.table-row-cell:empty {
+    -fx-border-width: 0;
+    -fx-background-color: white;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: white;
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: black;
+}
+
+.table-cell {
     -fx-border-color: transparent;
-}
-
-#itemsTable .column-header-background {
-    -fx-max-height: 0;
-    -fx-pref-height: 0;
-    -fx-min-height: 0;
-    visibility: hidden;
-}
-
-
-#itemsTable > .virtual-flow > .clipped-container > .sheet {
-    -fx-border-width: 0;
-    -fx-background-color: transparent;
-}
-
-#itemsTable .table-view {
-    -fx-border-width: 0;
+    -fx-padding: 14 10 14 10;
+    -fx-alignment: CENTER-LEFT;
 }
 
 #itemsTable .scroll-bar:horizontal {

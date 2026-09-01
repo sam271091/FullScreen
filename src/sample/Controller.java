@@ -24,6 +24,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -63,6 +65,9 @@ public class Controller {
 
     @FXML
     private Label discountLabel;
+
+    @FXML
+    private Label sumLabel;
 
     @FXML
     private HBox header;
@@ -106,6 +111,9 @@ public class Controller {
 
     @FXML
     private TableColumn<Row, Double> priceCol;
+
+    @FXML
+    private TableColumn<Row, Double> discountCol;
 
     @FXML
     private TableColumn<Row, Double> sumCol;
@@ -177,12 +185,21 @@ public class Controller {
         currentDate = LocalDateTime.now();
 
 
+        Label itemHeaderLabel = new Label("Məhsul");
+        itemHeaderLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 20;");
+        itemHeaderLabel.setMaxWidth(Double.MAX_VALUE);
+        itemHeaderLabel.setAlignment(Pos.CENTER_LEFT);
+        itemHeaderLabel.setPadding(new Insets(0, 0, 0, 10));
+        itemCol.setText("");
+        itemCol.setGraphic(itemHeaderLabel);
+
         isPlaying = false;
 
         colNo.setCellValueFactory(new PropertyValueFactory<Row, Integer>("num"));
         itemCol.setCellValueFactory(new PropertyValueFactory<Row, String>("Item"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<Row, Double>("quantity"));
         priceCol.setCellValueFactory(new PropertyValueFactory<Row, Double>("price"));
+        discountCol.setCellValueFactory(new PropertyValueFactory<Row, Double>("discountPercent"));
         sumCol.setCellValueFactory(new PropertyValueFactory<Row, Double>("sum"));
 
         quantityCol.setCellFactory(column -> new TableCell<Row, Double>() {
@@ -194,6 +211,18 @@ public class Controller {
                 setText(empty || value == null ? null : df.format(value) + " əd");
             }
         });
+
+
+        discountCol.setCellFactory(column -> new TableCell<Row, Double>() {
+            private final DecimalFormat df = new DecimalFormat("0.##");
+
+            @Override
+            protected void updateItem(Double value, boolean empty) {
+                super.updateItem(value, empty);
+                setText(empty || value == null ? null : df.format(value) + " %");
+            }
+        });
+
 
         sumCol.setCellFactory(column -> new TableCell<Row, Double>() {
             private final DecimalFormat df = new DecimalFormat("0.00");
@@ -231,6 +260,7 @@ public class Controller {
         itemCol.setMaxWidth( 1f * Integer.MAX_VALUE * 70 ); // 30% width
         quantityCol.setMaxWidth( 1f * Integer.MAX_VALUE * 8 ); // 20% width
         priceCol.setMaxWidth( 1f * Integer.MAX_VALUE * 8 ); // 20% width
+        discountCol.setMaxWidth( 1f * Integer.MAX_VALUE * 8 ); // 20% width
         sumCol.setMaxWidth( 1f * Integer.MAX_VALUE * 9 ); // 20% width
 
 
@@ -435,6 +465,8 @@ public class Controller {
 
         Double total = jobject.getDouble("total");
 
+        Double sum = jobject.getDouble("result");
+
         String CNumber = jobject.getString("cardNumber");
 
         rowsData.clear();
@@ -442,7 +474,7 @@ public class Controller {
         StringBuilder rowString = new StringBuilder();
         for (int i =0;i<rows.length();i++) {
             JSONObject row = (JSONObject) rows.get(i);
-            initData(new Row(row.getInt("num"),row.getString("item").toString(),row.getDouble("quantity"),row.getDouble("price"),row.getDouble("sum")));
+            initData(new Row(row.getInt("num"),row.getString("item").toString(),row.getDouble("quantity"),row.getDouble("price"),row.getDouble("discount"),row.getDouble("discountPercent"),row.getDouble("sum")));
 
         }
 
@@ -451,6 +483,8 @@ public class Controller {
 //        cardNumber.setWrapText(true);
 //
         DecimalFormat df = new DecimalFormat("0.00");
+
+        sumLabel.setText(df.format(sum));
 
         discountLabel.setText(df.format(discount));
 

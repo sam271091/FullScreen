@@ -16,9 +16,9 @@
                     <children>
                         <VBox fx:id="mainScreen" alignment="BOTTOM_CENTER" style="-fx-border-color: white; -fx-background-color: white; -fx-border-width: 20; -fx-border-radius: 20; -fx-background-radius: 50;">
                             <children>
-                                <HBox fx:id="headerDate">
+                                <HBox fx:id="headerDate" visible="false">
                                     <children>
-                                        <Label fx:id="currDate" text="Дата">
+                                        <Label fx:id="currDate" text="Дата" visible="false">
                                             <font>
                                                 <Font name="System Bold" size="24.0" />
                                             </font>
@@ -28,18 +28,18 @@
                                         <Insets left="20.0" />
                                     </VBox.margin>
                                 </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                                            <ImageView fx:id="LOGO" fitHeight="100.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                <image>
-                                                    <Image url="@../../../../Desktop/AliNino/logo.png" />
-                                                </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                                            </ImageView>
-                           </children>
-                        </HBox>
+                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                        <ImageView fx:id="LOGO" fitHeight="100.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../../../Desktop/AliNino/logo.png" />
+                                            </image>
+                                            <HBox.margin>
+                                                <Insets top="10.0" />
+                                            </HBox.margin>
+                                        </ImageView>
+                                    </children>
+                                </HBox>
                                 <HBox fx:id="header" alignment="TOP_RIGHT">
                                     <VBox.margin>
                                         <Insets right="20.0" top="5.0" />
@@ -47,11 +47,13 @@
                                 </HBox>
                                 <TableView fx:id="itemsTable" focusTraversable="false" style="-fx-border-width: 0;" stylesheets="@table-style.css">
                                     <columns>
-                                        <TableColumn fx:id="colNo" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-background-color: white; -fx-font-size: 20; -fx-size: 15; -fx-font-weight: bold;" text="№" />
-                                        <TableColumn fx:id="itemCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="-1.0" style="-fx-background-color: white; -fx-font-size: 20; -fx-size: 15; -fx-font-weight: bold;" text="Товар" />
-                                        <TableColumn fx:id="quantityCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="-1.0" style="-fx-background-color: white; -fx-size: 15; -fx-font-size: 20; -fx-alignment: CENTER-RIGHT; -fx-font-weight: bold;" text="Количество" />
-                                        <TableColumn fx:id="priceCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="-1.0" style="-fx-background-color: white; -fx-size: 15; -fx-font-size: 20; -fx-alignment: CENTER-RIGHT;" text="Цена" visible="false" />
-                                        <TableColumn fx:id="sumCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="105.0" style="-fx-background-color: white; -fx-size: 15; -fx-font-size: 20; -fx-alignment: CENTER-RIGHT; -fx-font-weight: bold;" text="Сумма" />
+                                        <TableColumn fx:id="colNo" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-background-color: white; -fx-font-size: 20; -fx-size: 15; -fx-font-weight: bold;" text="№" visible="false" />
+                                        <TableColumn fx:id="itemCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="-1.0" style="-fx-background-color: white; -fx-font-size: 20; -fx-size: 15; -fx-font-weight: bold;" text="Məhsul" />
+                                        <TableColumn fx:id="quantityCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="-1.0" style="-fx-background-color: white; -fx-size: 15; -fx-font-size: 20; -fx-alignment: CENTER; -fx-font-weight: bold;" text="Say" />
+                                        <TableColumn fx:id="priceCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="-1.0" style="-fx-background-color: white; -fx-size: 15; -fx-font-size: 20; -fx-alignment: CENTER;" text="Qiymət" />
+                                        <TableColumn fx:id="discountCol" prefWidth="-1.0" style="-fx-background-color: white; -fx-size: 15; -fx-font-size: 20; -fx-alignment: CENTER;" text="Endirim (%)" />
+
+                                        <TableColumn fx:id="sumCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="105.0" style="-fx-background-color: white; -fx-size: 15; -fx-font-size: 20; -fx-alignment: CENTER; -fx-font-weight: bold;" text="Məbləğ" />
                                     </columns>
                                     <columnResizePolicy>
                                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -66,51 +68,76 @@
                                             <children>
                                                 <VBox alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
                                                     <children>
-                                                        <HBox alignment="TOP_RIGHT" style="-fx-border-width: 2;">
-                                                            <VBox.margin>
-                                                                <Insets right="20.0" top="20.0" />
-                                                            </VBox.margin>
-                                                        </HBox>
-                                                        <HBox alignment="TOP_RIGHT">
-                                                            <children>
-                                                                <Label text="ENDIRIM:" textFill="#181717">
-                                                                    <font>
-                                                                        <Font name="System Bold" size="18.0" />
-                                                                    </font>
-                                                                    <HBox.margin>
-                                                                        <Insets />
-                                                                    </HBox.margin>
-                                                                    <padding>
-                                                                        <Insets right="20.0" />
-                                                                    </padding>
-                                                                </Label>
-                                                                <Label fx:id="discountLabel" text="Discount" textFill="#181717">
-                                                                    <font>
-                                                                        <Font name="Times New Roman Bold" size="18.0" />
-                                                                    </font>
-                                                                    <HBox.margin>
-                                                                        <Insets right="10.0" />
-                                                                    </HBox.margin>
-                                                                </Label>
-                                                            </children>
-                                                            <VBox.margin>
-                                                                <Insets right="20.0" top="20.0" />
-                                                            </VBox.margin>
-                                                        </HBox>
                                                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity">
                                                             <children>
-                                                                <Label text="Yekun mənləğ">
+                                                                <Label text="Cəmi" textFill="#181717">
                                                                     <font>
-                                                                        <Font name="System Bold" size="22.0" />
+                                                                        <Font name="System" size="18.0" />
                                                                     </font>
                                                                     <padding>
                                                                         <Insets left="20.0" right="20.0" />
                                                                     </padding>
                                                                 </Label>
                                                                 <Region HBox.hgrow="ALWAYS" />
-                                                                <Label fx:id="labelTotal" text="Total" textAlignment="JUSTIFY" textFill="#0d0d0d">
+                                                                <Label fx:id="sumLabel" text="Sum" textFill="#181717">
                                                                     <font>
-                                                                        <Font name="System Bold" size="22.0" />
+                                                                        <Font name="System" size="18.0" />
+                                                                    </font>
+                                                                    <padding>
+                                                                        <Insets left="20.0" right="20.0" />
+                                                                    </padding>
+                                                                </Label>
+                                                            </children>
+                                                            <VBox.margin>
+                                                                <Insets right="20.0" top="20.0" />
+                                                            </VBox.margin>
+                                                        </HBox>
+
+                                                        <HBox alignment="CENTER_LEFT" maxWidth="Infinity">
+                                                            <children>
+                                                                <Label text="Endirim" textFill="#e63946">
+                                                                    <font>
+                                                                        <Font name="System" size="18.0" />
+                                                                    </font>
+                                                                    <padding>
+                                                                        <Insets left="20.0" right="20.0" />
+                                                                    </padding>
+                                                                </Label>
+                                                                <Region HBox.hgrow="ALWAYS" />
+                                                                <Label fx:id="discountLabel" text="Discount" textFill="#e63946">
+                                                                    <font>
+                                                                        <Font name="System" size="18.0" />
+                                                                    </font>
+                                                                    <padding>
+                                                                        <Insets left="20.0" right="20.0" />
+                                                                    </padding>
+                                                                </Label>
+                                                            </children>
+                                                            <VBox.margin>
+                                                                <Insets right="20.0" top="5.0" />
+                                                            </VBox.margin>
+                                                        </HBox>
+
+                                                        <Region prefHeight="1.0" style="-fx-background-color: #d9d9d9;">
+                                                            <VBox.margin>
+                                                                <Insets bottom="10.0" left="20.0" right="20.0" top="15.0" />
+                                                            </VBox.margin>
+                                                        </Region>
+
+                                                        <HBox alignment="CENTER_LEFT" maxWidth="Infinity">
+                                                            <children>
+                                                                <Label text="YEKUN MƏBLƏĞ">
+                                                                    <font>
+                                                                        <Font name="System Bold" size="24.0" />
+                                                                    </font>
+                                                                    <padding>
+                                                                        <Insets left="20.0" right="20.0" />
+                                                                    </padding>
+                                                                </Label>
+                                                                <Region HBox.hgrow="ALWAYS" />
+                                                                <Label fx:id="labelTotal" text="Total" textFill="#e63946">
+                                                                    <font>
+                                                                        <Font name="System Bold" size="34.0" />
                                                                     </font>
                                                                     <padding>
                                                                         <Insets left="20.0" right="10.0" />
@@ -121,6 +148,7 @@
                                                                 <Insets right="20.0" />
                                                             </VBox.margin>
                                                         </HBox>
+
                                                         <Label fx:id="labelEndOfSale" text="Satış tamamlandı" textAlignment="CENTER" textFill="RED">
                                                             <font>
                                                                 <Font name="System Bold" size="24.0" />
