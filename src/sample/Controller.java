@@ -245,11 +245,11 @@ public class Controller {
          height = mediaView.fitHeightProperty();
 
 
-        currDate.setText(dtf.format(currentDate));
+//        currDate.setText(dtf.format(currentDate));
 
 
 
-        LOGO.setImage(new Image("/sample/logo_pic.png"));
+//        LOGO.setImage(new Image("/sample/logo_pic.png"));
 
 
         itemsTable.setMaxWidth(1f * Integer.MAX_VALUE * 70);
@@ -493,7 +493,8 @@ public class Controller {
 //        discountLabel.setWrapText(true);
 
 
-        labelTotal.setText(Double.toString(total));
+//        labelTotal.setText(Double.toString(total));
+        labelTotal.setText(df.format(total));
         labelTotal.setWrapText(true);
     }
 
